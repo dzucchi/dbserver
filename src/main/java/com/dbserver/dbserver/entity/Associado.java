@@ -16,5 +16,5 @@ public class Associado {
     private Long id;
 
     @Column(name = "cpf", nullable = false)
-    private Long cpf;
+    private String cpf;
 }

@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class AssociadoDto {
     private Long id;
-    private Long cpf;
+    private String cpf;
 }

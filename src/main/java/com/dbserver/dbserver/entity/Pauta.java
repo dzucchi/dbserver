@@ -4,13 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "pauta")
-public class Pauta {
+public class Pauta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,15 +19,7 @@ public class Pauta {
     @Column(name = "descricao", nullable = false, length = 800)
     private String descricao;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sessaoVotacao", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "sessaoVotacao")
     private SessaoVotacao sessaoVotacao;
-
-    @ManyToMany
-    @JoinTable(
-            name = "pauta_associados",
-            joinColumns = @JoinColumn(name = "pauta_id"),
-            inverseJoinColumns = @JoinColumn(name = "associado_id")
-    )
-    private List<Associado> associados;
 }
