@@ -16,12 +16,14 @@ public class ApuracaoVotosService {
         ApuracaoResponseDto dto = new ApuracaoResponseDto();
         dto.setId(pauta.getId());
         dto.setDescricao(pauta.getDescricao());
-        dto.setVotosNao(votoRepository.getTotalVotoNao());
-        dto.setVotosSim(votoRepository.getTotalVotoSim());
+        dto.setVotosNao(votoRepository.getTotalVotoNao(pauta.getId()));
+        dto.setVotosSim(votoRepository.getTotalVotoSim(pauta.getId()));
         if (dto.getVotosSim().compareTo(dto.getVotosNao()) > 0) {
             dto.setIsResultado("Aprovado");
-        } else {
+        } else if (dto.getVotosSim().compareTo(dto.getVotosNao()) < 0) {
             dto.setIsResultado("Reprovado");
+        } else {
+            dto.setIsResultado("Empate");
         }
         return dto;
     }
